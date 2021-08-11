@@ -1,0 +1,55 @@
+Q1
+
+MySQL  localhost:33060+ ssl  SQL > create schema `seriesdb`;
+MySQL  localhost:33060+ ssl  SQL > use seriesdb;
+MySQL  localhost:33060+ ssl  seriesdb  SQL > create table series(id INT NOT NULL AUTO_INCREMENT,name VARCHAR(256) NOT NULL,PRIMARY KEY(id));
+
+ MySQL  localhost:33060+ ssl  seriesdb  SQL > create table director(id INT NOT NULL AUTO_INCREMENT,name VARCHAR(256) NOT NULL,PRIMARY KEY(id));
+ MySQL  localhost:33060+ ssl  seriesdb  SQL > create table country(id INT NOT NULL AUTO_INCREMENT,name VARCHAR(256) NOT NULL,PRIMARY KEY(id));
+ MySQL  localhost:33060+ ssl  seriesdb  SQL > create table genre(id INT NOT NULL AUTO_INCREMENT,name VARCHAR(256) NOT NULL,PRIMARY KEY(id));
+
+ MySQL  localhost:33060+ ssl  seriesdb  SQL > select* from series;
+ MySQL  localhost:33060+ ssl  seriesdb  SQL > select* from director;
+ MySQL  localhost:33060+ ssl  seriesdb  SQL > select* from country;
+ MySQL  localhost:33060+ ssl  seriesdb  SQL > select* from genre;
+ mysql  localhost:33060+ ssl  seriesdb  SQL > create table seriesdb(id INT NOT NULL AUTO_INCREMENT,series INT NOT NULL, director INT NOT NULL,genre INT NOT NULL, country INT NOT NULL,PRIMARY KEY(id));
+ mysql  localhost:33060+ ssl  seriesdb  SQL > select seriesdb.id as id,series.name as series,genre.name as genre,country.name as country,director.name as director from seriesdb inner join series on seriesdb.series=series.id join director on seriesdb.director=director.id join genre on seriesdb.genre=genre.id join country on seriesdb.country=country.id;
++----+----------------------+----------+-----------+--------------------+
+| id | series               | genre    | country   | director           |
++----+----------------------+----------+-----------+--------------------+
+|  1 | The Vamphire Dairies | horror   | America   | John Dahl          |
+|  2 | Control Z            | drama    | Spanish   | alejandro Lozano   |
+|  3 | Warner Bros          | mystrey  | Brazil    | Lang Fisher        |
+|  4 | Riverdale            | mystrey  | US        | John Dahl          |
+|  5 | 3%                   | thriller | Brazil    | philippe Barcinski |
+|  6 | Never Have I ever    | drama    | Australia | Lang Fisher        |
++----+----------------------+----------+-----------+--------------------+
+
+
+
+ Q2
+ 
+mysql localhost:3306+ ssl seriesdb sql> alter table series add genre int,add country int,add status VARCHAR(256),add yor INT,add yoe INT, add director INT; 
+MySQL  localhost:33060+ ssl  seriesdb  SQL > select series.id as id, series.name as name,series.status as status,series.yor as yor,series.yoe as yoe, genre.name as genre,country.name as country,director.name as director from series inner join genre on series.genre=genre.id join country on series.country=country.id join director on series.director=director.id;
++----+----------------------+---------+------+------+----------+-----------+--------------------+
+| id | name                 | status  | yor  | yoe  | genre    | country   | director           |
++----+----------------------+---------+------+------+----------+-----------+--------------------+
+|  1 | The Vamphire Dairies | running | 2009 | 2017 | horror   | USA       | John Dahl          |
+|  2 | Control Z            | running | 2020 | 2021 | drama    | Spanish   | alejandro Lozano   |
+|  3 | Warner Bros          | ended   | 2007 | 2013 | mystrey  | USA       | Lang Fisher        |
+|  4 | Riverdale            | running | 2017 | 2021 | mystrey  | USA       | John Dahl          |
+|  5 | 3%                   | ended   | 2012 | 2020 | thriller | Brazil    | philippe Barcinski |
+|  6 | Never Have I ever    | running | 2020 | 2021 | drama    | Australia | Lang Fisher        |
++----+----------------------+---------+------+------+----------+-----------+--------------------+
+
+
+Q3
+
+ MySQL  localhost:33060+ ssl  seriesdb  SQL > select id,name,genre,country,director from series where country=4 and status='ended';
++----+-------------+-------+---------+----------+
+| id | name        | genre | country | director |
++----+-------------+-------+---------+----------+
+|  3 | Warner Bros |     5 |       4 |        4 |
++----+-------------+-------+---------+----------+
+
+                                                                                                                                           -***-
